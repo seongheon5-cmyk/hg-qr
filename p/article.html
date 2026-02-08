@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>대정향교 - 글로 보기</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 430px;
+      width: 100%;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.98);
+      min-height: 100vh;
+      position: relative;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #8b5a3c 0%, #6d4428 100%);
+      color: white;
+      padding: 24px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    
+    .header p {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+    
+    .back-btn {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      text-decoration: none;
+      font-size: 24px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.3s;
+    }
+    
+    .back-btn:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    
+    .hero-image {
+      width: 100%;
+      height: 200px;
+      background: url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzAyMDFfMTk5%2FMDAxNDg1OTU4MTc2MjU0.SoUPrkHxkaDcOgVh1_NDzo-IAh4aPdhKXJu8SOeyKi4g.JUQXhVTImrBfgEhckZy86R2QRHmNeVgJhMdFlXxaSf0g.JPEG.dailytalk_hy%2FDSC_4034.jpg&type=sc960_832') center/cover;
+      position: relative;
+    }
+    
+    .hero-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.6));
+      color: white;
+      padding: 16px;
+      font-size: 14px;
+    }
+    
+    .content {
+      padding: 24px;
+    }
+    
+    .article {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .article-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #8b5a3c;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid #8b5a3c;
+    }
+    
+    .article-section {
+      margin-bottom: 24px;
+    }
+    
+    .section-heading {
+      font-size: 16px;
+      font-weight: 700;
+      color: #6d4428;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .section-heading::before {
+      content: '▪';
+      color: #8b5a3c;
+      font-size: 20px;
+    }
+    
+    .article-text {
+      font-size: 15px;
+      line-height: 1.9;
+      color: #333;
+      margin-bottom: 12px;
+    }
+    
+    .timeline {
+      background: rgba(139, 90, 60, 0.05);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+    
+    .timeline-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed #ddd;
+    }
+    
+    .timeline-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    
+    .timeline-year {
+      flex-shrink: 0;
+      width: 80px;
+      font-weight: 700;
+      color: #8b5a3c;
+      font-size: 14px;
+    }
+    
+    .timeline-desc {
+      flex: 1;
+      font-size: 14px;
+      color: #555;
+      line-height: 1.6;
+    }
+    
+    .info-card {
+      background: linear-gradient(135deg, #8b5a3c 0%, #6d4428 100%);
+      color: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    
+    .info-card-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .info-card-text {
+      font-size: 14px;
+      line-height: 1.8;
+      opacity: 0.95;
+    }
+    
+    .building-list {
+      display: grid;
+      gap: 8px;
+      margin: 12px 0;
+    }
+    
+    .building-item {
+      background: rgba(139, 90, 60, 0.08);
+      border-left: 3px solid #8b5a3c;
+      padding: 12px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #555;
+    }
+    
+    .building-name {
+      font-weight: 700;
+      color: #8b5a3c;
+      margin-right: 8px;
+    }
+    
+    @media (max-width: 430px) {
+      .container {
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <a href="../index.html" class="back-btn">←</a>
+      <h1 id="pageTitle">글로 보기</h1>
+      <p id="pageSubtitle">Article</p>
+    </div>
+    
+    <div class="hero-image">
+      <div class="hero-overlay">
+        제주특별자치도 유형문화재 제4호
+      </div>
+    </div>
+    
+    <div class="content">
+      <div class="article">
+        <div class="article-title">대정향교 大靜鄕校</div>
+        
+        <div class="article-section">
+          <div class="section-heading">향교란 무엇인가</div>
+          <div class="article-text">
+            향교는 공자를 비롯한 여러 성현께 제사를 지내며, 지방 백성의 교육과 교화를 위하여 세운 국립교육기관입니다. 
+            조선시대 지방 교육의 중심지로서, 유교 경전을 가르치고 예의범절을 익히는 곳이었습니다.
+          </div>
+        </div>
+        
+        <div class="article-section">
+          <div class="section-heading">역사</div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-year">1416년</div>
+              <div class="timeline-desc">조선 태종 16년, 대정향교 최초 건립</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">1653년</div>
+              <div class="timeline-desc">효종 4년, 현재 위치로 이전</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">1772년</div>
+              <div class="timeline-desc">영조 48년, 명륜당 중건</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">1834년</div>
+              <div class="timeline-desc">헌종 원년, 대성전 중건</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">1971년</div>
+              <div class="timeline-desc">제주특별자치도 유형문화재 제4호 지정</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="article-section">
+          <div class="section-heading">건축 구조</div>
+          <div class="article-text">
+            대정향교는 '전학후묘(前學後廟)'의 배치를 따릅니다. 앞쪽에 강학공간인 명륜당이 북향하여 자리잡고, 
+            뒤쪽에 제향공간인 대성전이 남쪽을 향하여 자리잡고 있습니다.
+          </div>
+          
+          <div class="building-list">
+            <div class="building-item">
+              <span class="building-name">대성전</span>
+              성현께 제사를 지내는 제향 공간
+            </div>
+            <div class="building-item">
+              <span class="building-name">명륜당</span>
+              유생들이 공부하던 강학 공간
+            </div>
+            <div class="building-item">
+              <span class="building-name">동재·서재</span>
+              유생들의 기숙사
+            </div>
+            <div class="building-item">
+              <span class="building-name">내삼문</span>
+              대성전으로 들어가는 문
+            </div>
+          </div>
+        </div>
+        
+        <div class="info-card">
+          <div class="info-card-title">💡 추사 김정희와의 인연</div>
+          <div class="info-card-text">
+            조선 후기의 대학자이자 서예가인 추사 김정희가 제주도로 유배를 왔을 때, 
+            대정향교에서 학생들을 가르쳤다고 전해집니다. 이곳에서 많은 제자들을 길러내며 
+            제주 지역 교육 발전에 큰 기여를 했습니다.
+          </div>
+        </div>
+        
+        <div class="article-section">
+          <div class="section-heading">건축의 특징</div>
+          <div class="article-text">
+            대정향교는 많은 보수를 거쳤지만, 장식이 검소하고 단청을 하지 않아 전체적으로 간결하고 
+            소박한 느낌을 줍니다. 이는 유교의 검소함을 추구하는 정신을 잘 반영하고 있습니다.
+          </div>
+          <div class="article-text">
+            향교 주위에는 수백 년 된 큰 소나무들이 자리하고 있어 운치를 더하며, 
+            제주 지역 특유의 자연환경과 조화를 이루고 있습니다.
+          </div>
+        </div>
+        
+        <div class="article-section">
+          <div class="section-heading">현재의 모습</div>
+          <div class="article-text">
+            현재 대정향교는 교육적 기능은 사라지고 제사 기능만 남아있습니다. 
+            매년 봄과 가을에 석전대제(釋奠大祭)를 지내며 유교 전통을 이어가고 있습니다.
+          </div>
+          <div class="article-text">
+            1948년부터는 문명학원을 설립하여 운영하고 있으며, 현재는 제주도 향교재단에서 관리를 담당하고 있습니다.
+          </div>
+        </div>
+        
+        <div class="article-section">
+          <div class="section-heading">소장 전적</div>
+          <div class="article-text">
+            『대정향교절목(大靜鄕校節目)』 등 18종 37권의 귀중한 책이 남아있으며, 
+            유교 경전의 집주류(集註類)가 주를 이루고 있습니다. 이는 조선시대 지방 교육기관의 
+            학문적 수준을 보여주는 중요한 자료입니다.
+          </div>
+        </div>
+      </div>
+      
+      <div class="article" style="background: rgba(139, 90, 60, 0.05); padding: 20px;">
+        <div style="text-align: center; color: #666; font-size: 13px; line-height: 1.8;">
+          <strong style="color: #8b5a3c;">관람 안내</strong><br>
+          제주특별자치도 서귀포시 안덕면 단산<br>
+          문의: 제주도 향교재단<br>
+          지정: 제주특별자치도 유형문화재 제4호
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    const translations = {
+      ko: {
+        pageTitle: '글로 보기',
+        pageSubtitle: 'Article'
+      },
+      en: {
+        pageTitle: 'Read Article',
+        pageSubtitle: 'Detailed Information'
+      },
+      ja: {
+        pageTitle: '文章で見る',
+        pageSubtitle: '詳細記事'
+      },
+      zh: {
+        pageTitle: '阅读文章',
+        pageSubtitle: '详细信息'
+      }
+    };
+  </script>
+</body>
+</html>
