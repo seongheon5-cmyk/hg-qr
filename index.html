@@ -3,94 +3,347 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>대정향교 ① 테스트 포인트</title>
-
+  <title>대정향교 QR 안내</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
     body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      line-height: 1.6;
-      background: #fff;
-      color: #111;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
-
-    header {
-      padding: 16px 16px 8px;
-    }
-
-    h1 {
-      font-size: 20px;
-      margin: 0 0 6px;
-    }
-
-    header p {
-      margin: 0;
-      color: #555;
-      font-size: 14px;
-    }
-
-    .wrap {
-      padding: 0 16px 24px;
-    }
-
-    .video {
-      position: relative;
+    
+    .container {
+      max-width: 430px;
       width: 100%;
-      aspect-ratio: 16 / 9;
-      background: #000;
-      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
       overflow: hidden;
-      margin-top: 12px;
+      position: relative;
     }
-
-    iframe {
+    
+    /* 향교 배경 이미지 - 더 선명하고 크게 */
+    .container::before {
+      content: '';
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      height: 60%;
+      background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Cdefs%3E%3ClinearGradient id="wood" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:rgb(139,90,43);stop-opacity:0.3" /%3E%3Cstop offset="100%25" style="stop-color:rgb(109,68,40);stop-opacity:0.3" /%3E%3C/linearGradient%3E%3C/defs%3E%3Cg opacity="0.25"%3E%3C!-- 지붕 --%3E%3Cpath d="M50,80 L200,40 L350,80 L330,85 L200,50 L70,85 Z" fill="url(%23wood)" stroke="rgb(80,50,30)" stroke-width="2"/%3E%3Cpath d="M70,85 L200,50 L330,85 L330,95 L200,60 L70,95 Z" fill="rgb(100,60,35)" opacity="0.4"/%3E%3C!-- 기둥들 --%3E%3Crect x="100" y="95" width="15" height="120" fill="rgb(120,70,40)" opacity="0.35"/%3E%3Crect x="190" y="95" width="20" height="120" fill="rgb(120,70,40)" opacity="0.35"/%3E%3Crect x="285" y="95" width="15" height="120" fill="rgb(120,70,40)" opacity="0.35"/%3E%3C!-- 기단 --%3E%3Crect x="80" y="215" width="240" height="15" fill="rgb(140,140,140)" opacity="0.3"/%3E%3Crect x="70" y="230" width="260" height="10" fill="rgb(120,120,120)" opacity="0.3"/%3E%3C!-- 문 --%3E%3Crect x="175" y="150" width="50" height="65" fill="rgb(100,60,35)" opacity="0.4" stroke="rgb(80,50,30)" stroke-width="2"/%3E%3Crect x="182" y="157" width="16" height="51" fill="rgb(80,50,30)" opacity="0.3"/%3E%3Crect x="202" y="157" width="16" height="51" fill="rgb(80,50,30)" opacity="0.3"/%3E%3C!-- 창문 --%3E%3Ccircle cx="140" cy="140" r="12" fill="rgb(200,180,150)" opacity="0.3" stroke="rgb(100,70,45)" stroke-width="2"/%3E%3Ccircle cx="260" cy="140" r="12" fill="rgb(200,180,150)" opacity="0.3" stroke="rgb(100,70,45)" stroke-width="2"/%3E%3C!-- 격자 무늬 --%3E%3Cline x1="135" y1="140" x2="145" y2="140" stroke="rgb(100,70,45)" stroke-width="1.5" opacity="0.4"/%3E%3Cline x1="140" y1="135" x2="140" y2="145" stroke="rgb(100,70,45)" stroke-width="1.5" opacity="0.4"/%3E%3Cline x1="255" y1="140" x2="265" y2="140" stroke="rgb(100,70,45)" stroke-width="1.5" opacity="0.4"/%3E%3Cline x1="260" y1="135" x2="260" y2="145" stroke="rgb(100,70,45)" stroke-width="1.5" opacity="0.4"/%3E%3C/g%3E%3C/svg%3E');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      pointer-events: none;
+      z-index: 0;
     }
-
-    .desc {
-      margin-top: 14px;
+    
+    .header {
+      background: linear-gradient(135deg, #8b5a3c 0%, #6d4428 100%);
+      color: white;
+      padding: 32px 24px 24px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    
+    .header p {
       font-size: 15px;
+      opacity: 0.9;
+      font-weight: 300;
     }
-
-    a.back {
-      display: inline-block;
-      margin-top: 18px;
+    
+    .lang-selector {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      padding: 16px 24px;
+      background: rgba(139, 90, 60, 0.05);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .lang-btn {
+      padding: 8px 16px;
+      border: 2px solid #8b5a3c;
+      background: white;
+      color: #8b5a3c;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+    
+    .lang-btn:hover {
+      background: #8b5a3c;
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    .lang-btn.active {
+      background: #8b5a3c;
+      color: white;
+    }
+    
+    .content {
+      padding: 24px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 16px;
+      padding-left: 12px;
+      border-left: 4px solid #8b5a3c;
+    }
+    
+    .view-modes {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .view-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px;
+      background: white;
+      border: 2px solid #e8e8e8;
+      border-radius: 16px;
       text-decoration: none;
-      border: 1px solid #ddd;
-      padding: 10px 14px;
+      color: #333;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .view-btn:hover {
+      border-color: #8b5a3c;
+      transform: translateX(4px);
+      box-shadow: 0 4px 16px rgba(139, 90, 60, 0.15);
+    }
+    
+    .view-btn-content {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .view-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #8b5a3c 0%, #6d4428 100%);
       border-radius: 12px;
-      color: #111;
-      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    
+    .view-text {
+      text-align: left;
+      flex: 1;
+    }
+    
+    .view-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    
+    .view-desc {
+      font-size: 13px;
+      color: #888;
+    }
+    
+    .arrow {
+      font-size: 20px;
+      color: #8b5a3c;
+      flex-shrink: 0;
+    }
+    
+    .footer {
+      padding: 20px 24px;
+      text-align: center;
+      background: rgba(139, 90, 60, 0.05);
+      font-size: 12px;
+      color: #666;
+      position: relative;
+      z-index: 1;
+      line-height: 1.6;
+    }
+    
+    @media (max-width: 430px) {
+      .container {
+        border-radius: 0;
+        min-height: 100vh;
+      }
+      
+      body {
+        padding: 0;
+      }
     }
   </style>
 </head>
-
 <body>
-  <header>
-    <h1>대정향교 ① 테스트 포인트</h1>
-    <p>영상 안내 · QR 전용</p>
-  </header>
-
-  <div class="wrap">
-    <div class="video">
-      <iframe
-        src="https://www.youtube.com/embed/JE-5eGhthhI?start=41&rel=0&modestbranding=1&playsinline=1"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-        loading="lazy">
-      </iframe>
+  <div class="container">
+    <div class="header">
+      <h1 id="mainTitle">대정향교</h1>
+      <p id="subTitle">Daejeong Hyanggyo · 大靜鄕校</p>
     </div>
-
-    <div class="desc">
-      이 공간은 테스트용 설명 문구입니다.<br>
-      실제 운영 시에는 이 자리에 관람 포인트 핵심 설명 2~3줄만 넣으면 됩니다.
+    
+    <div class="lang-selector">
+      <button class="lang-btn active" onclick="changeLang('ko')">한국어</button>
+      <button class="lang-btn" onclick="changeLang('en')">English</button>
+      <button class="lang-btn" onclick="changeLang('ja')">日本語</button>
+      <button class="lang-btn" onclick="changeLang('zh')">中文</button>
     </div>
-
-    <a class="back" href="../index.html">← 처음으로</a>
+    
+    <div class="content">
+      <div class="section-title" id="sectionTitle">관람 방식 선택</div>
+      
+      <div class="view-modes">
+        <a href="./p/animation.html" class="view-btn">
+          <div class="view-btn-content">
+            <div class="view-icon">🎬</div>
+            <div class="view-text">
+              <div class="view-title" id="animationTitle">애니메이션으로 보기</div>
+              <div class="view-desc" id="animationDesc">생동감 있는 영상으로 감상하기</div>
+            </div>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+        
+        <a href="./p/documentary.html" class="view-btn">
+          <div class="view-btn-content">
+            <div class="view-icon">📹</div>
+            <div class="view-text">
+              <div class="view-title" id="documentaryTitle">다큐로 보기</div>
+              <div class="view-desc" id="documentaryDesc">역사와 문화를 깊이 있게 탐구</div>
+            </div>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+        
+        <a href="./p/article.html" class="view-btn">
+          <div class="view-btn-content">
+            <div class="view-icon">📖</div>
+            <div class="view-text">
+              <div class="view-title" id="articleTitle">글로 보기</div>
+              <div class="view-desc" id="articleDesc">상세한 설명과 함께 읽기</div>
+            </div>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+      </div>
+    </div>
+    
+    <div class="footer" id="footer">
+      제주특별자치도 서귀포시 대정읍<br>
+      © 2024 Daejeong Hyanggyo Guide
+    </div>
   </div>
+  
+  <script>
+    const translations = {
+      ko: {
+        mainTitle: '대정향교',
+        subTitle: 'Daejeong Hyanggyo · 大靜鄕校',
+        sectionTitle: '관람 방식 선택',
+        animationTitle: '애니메이션으로 보기',
+        animationDesc: '생동감 있는 영상으로 감상하기',
+        documentaryTitle: '다큐로 보기',
+        documentaryDesc: '역사와 문화를 깊이 있게 탐구',
+        articleTitle: '글로 보기',
+        articleDesc: '상세한 설명과 함께 읽기',
+        footer: '제주특별자치도 서귀포시 대정읍<br>© 2024 Daejeong Hyanggyo Guide'
+      },
+      en: {
+        mainTitle: 'Daejeong Hyanggyo',
+        subTitle: 'Confucian School',
+        sectionTitle: 'Select Viewing Method',
+        animationTitle: 'Watch Animation',
+        animationDesc: 'Experience with vivid videos',
+        documentaryTitle: 'Watch Documentary',
+        documentaryDesc: 'Explore history and culture in depth',
+        articleTitle: 'Read Article',
+        articleDesc: 'Read with detailed explanations',
+        footer: 'Daejeong-eup, Seogwipo-si, Jeju<br>© 2024 Daejeong Hyanggyo Guide'
+      },
+      ja: {
+        mainTitle: '大静郷校',
+        subTitle: '儒教教育機関',
+        sectionTitle: '閲覧方法を選択',
+        animationTitle: 'アニメーションで見る',
+        animationDesc: '生き生きとした映像で鑑賞',
+        documentaryTitle: 'ドキュメンタリーで見る',
+        documentaryDesc: '歴史と文化を深く探求',
+        articleTitle: '文章で見る',
+        articleDesc: '詳細な説明と共に読む',
+        footer: '済州特別自治道 西帰浦市 大静邑<br>© 2024 Daejeong Hyanggyo Guide'
+      },
+      zh: {
+        mainTitle: '大静乡校',
+        subTitle: '儒学教育机构',
+        sectionTitle: '选择观看方式',
+        animationTitle: '观看动画',
+        animationDesc: '通过生动的视频欣赏',
+        documentaryTitle: '观看纪录片',
+        documentaryDesc: '深入探索历史和文化',
+        articleTitle: '阅读文章',
+        articleDesc: '阅读详细说明',
+        footer: '济州特别自治道 西归浦市 大静邑<br>© 2024 Daejeong Hyanggyo Guide'
+      }
+    };
+    
+    function changeLang(lang) {
+      // 버튼 활성화 상태 변경
+      const buttons = document.querySelectorAll('.lang-btn');
+      buttons.forEach(function(btn) {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      // 텍스트 변경
+      const t = translations[lang];
+      document.getElementById('mainTitle').textContent = t.mainTitle;
+      document.getElementById('subTitle').textContent = t.subTitle;
+      document.getElementById('sectionTitle').textContent = t.sectionTitle;
+      document.getElementById('animationTitle').textContent = t.animationTitle;
+      document.getElementById('animationDesc').textContent = t.animationDesc;
+      document.getElementById('documentaryTitle').textContent = t.documentaryTitle;
+      document.getElementById('documentaryDesc').textContent = t.documentaryDesc;
+      document.getElementById('articleTitle').textContent = t.articleTitle;
+      document.getElementById('articleDesc').textContent = t.articleDesc;
+      document.getElementById('footer').innerHTML = t.footer;
+      
+      // HTML lang 속성 변경
+      document.documentElement.lang = lang;
+    }
+  </script>
 </body>
 </html>
