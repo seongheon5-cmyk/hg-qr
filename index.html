@@ -5,17 +5,268 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>대정향교 QR 안내</title>
   <style>
-    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
-    .wrap { padding:16px; }
-    a { display:block; padding:12px; border:1px solid #eee; border-radius:12px;
-        text-decoration:none; color:#111; margin-top:10px; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 430px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgb(200,180,160)" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="200" height="200" fill="url(%23grid)"/><g opacity="0.15"><path d="M50,30 L150,30 L150,50 L130,50 L130,80 L150,80 L150,170 L50,170 L50,80 L70,80 L70,50 L50,50 Z M80,60 L80,100 L120,100 L120,60 Z" fill="rgb(139,90,43)"/><rect x="90" y="110" width="20" height="30" fill="rgb(139,90,43)"/></g></svg>') center/300px no-repeat;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #8b5a3c 0%, #6d4428 100%);
+      color: white;
+      padding: 32px 24px 24px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    
+    .header p {
+      font-size: 15px;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+    
+    .lang-selector {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      padding: 16px 24px;
+      background: rgba(139, 90, 60, 0.05);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .lang-btn {
+      padding: 8px 16px;
+      border: 2px solid #8b5a3c;
+      background: white;
+      color: #8b5a3c;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .lang-btn:hover {
+      background: #8b5a3c;
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    .lang-btn.active {
+      background: #8b5a3c;
+      color: white;
+    }
+    
+    .content {
+      padding: 24px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 16px;
+      padding-left: 12px;
+      border-left: 4px solid #8b5a3c;
+    }
+    
+    .view-modes {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .view-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px;
+      background: white;
+      border: 2px solid #e8e8e8;
+      border-radius: 16px;
+      text-decoration: none;
+      color: #333;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .view-btn:hover {
+      border-color: #8b5a3c;
+      transform: translateX(4px);
+      box-shadow: 0 4px 16px rgba(139, 90, 60, 0.15);
+    }
+    
+    .view-btn-content {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .view-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #8b5a3c 0%, #6d4428 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+    
+    .view-text {
+      text-align: left;
+    }
+    
+    .view-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    
+    .view-desc {
+      font-size: 13px;
+      color: #888;
+    }
+    
+    .arrow {
+      font-size: 20px;
+      color: #8b5a3c;
+    }
+    
+    .footer {
+      padding: 20px 24px;
+      text-align: center;
+      background: rgba(139, 90, 60, 0.05);
+      font-size: 12px;
+      color: #666;
+      position: relative;
+      z-index: 1;
+    }
+    
+    @media (max-width: 430px) {
+      .container {
+        border-radius: 0;
+        min-height: 100vh;
+      }
+      
+      body {
+        padding: 0;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>대정향교 QR 안내</h1>
-    <p>관람 포인트를 선택하세요.</p>
-    <a href="./p/01.html">① (테스트) 첫 포인트 보기 →</a>
+  <div class="container">
+    <div class="header">
+      <h1>대정향교</h1>
+      <p>Daejeong Hyanggyo · 大靜鄕校</p>
+    </div>
+    
+    <div class="lang-selector">
+      <button class="lang-btn active" onclick="changeLang('ko')">한국어</button>
+      <button class="lang-btn" onclick="changeLang('en')">English</button>
+      <button class="lang-btn" onclick="changeLang('ja')">日本語</button>
+      <button class="lang-btn" onclick="changeLang('zh')">中文</button>
+    </div>
+    
+    <div class="content">
+      <div class="section-title">관람 방식 선택</div>
+      
+      <div class="view-modes">
+        <a href="./p/animation.html" class="view-btn">
+          <div class="view-btn-content">
+            <div class="view-icon">🎬</div>
+            <div class="view-text">
+              <div class="view-title">애니메이션으로 보기</div>
+              <div class="view-desc">생동감 있는 영상으로 감상하기</div>
+            </div>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+        
+        <a href="./p/documentary.html" class="view-btn">
+          <div class="view-btn-content">
+            <div class="view-icon">📹</div>
+            <div class="view-text">
+              <div class="view-title">다큐로 보기</div>
+              <div class="view-desc">역사와 문화를 깊이 있게 탐구</div>
+            </div>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+        
+        <a href="./p/article.html" class="view-btn">
+          <div class="view-btn-content">
+            <div class="view-icon">📖</div>
+            <div class="view-text">
+              <div class="view-title">글로 보기</div>
+              <div class="view-desc">상세한 설명과 함께 읽기</div>
+            </div>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+      </div>
+    </div>
+    
+    <div class="footer">
+      제주특별자치도 서귀포시 대정읍<br>
+      © 2024 Daejeong Hyanggyo Guide
+    </div>
   </div>
+  
+  <script>
+    function changeLang(lang) {
+      const buttons = document.querySelectorAll('.lang-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // 추후 언어별 콘텐츠 전환 로직 추가 가능
+      console.log('Language changed to:', lang);
+    }
+  </script>
 </body>
 </html>
