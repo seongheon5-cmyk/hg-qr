@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>대정향교 - 다큐로 보기</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 430px;
+      width: 100%;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.98);
+      min-height: 100vh;
+      position: relative;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #8b5a3c 0%, #6d4428 100%);
+      color: white;
+      padding: 24px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    
+    .header p {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+    
+    .back-btn {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      text-decoration: none;
+      font-size: 24px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.3s;
+    }
+    
+    .back-btn:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 비율 */
+      background: #000;
+    }
+    
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    .content {
+      padding: 24px;
+    }
+    
+    .section {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #8b5a3c;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #8b5a3c;
+    }
+    
+    .section-text {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #333;
+    }
+    
+    .highlight {
+      background: rgba(139, 90, 60, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    
+    @media (max-width: 430px) {
+      .container {
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <a href="../index.html" class="back-btn">←</a>
+      <h1 id="pageTitle">다큐로 보기</h1>
+      <p id="pageSubtitle">Documentary</p>
+    </div>
+    
+    <div class="video-container">
+      <iframe 
+        src="https://www.youtube.com/embed/JE-5eGhthhI" 
+        title="대정향교 다큐멘터리"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
+    
+    <div class="content">
+      <div class="section">
+        <div class="section-title">대정향교란?</div>
+        <div class="section-text">
+          향교는 공자를 비롯한 여러 성현께 제사를 지내며, 지방 백성의 교육과 교화를 위하여 세운 <span class="highlight">국립교육기관</span>입니다.
+          <br><br>
+          대정향교는 <span class="highlight">조선 태종 16년(1416)</span>에 세워졌으며, 이후 터가 좋지 않다 하여 여러 차례 옮기다가 
+          <span class="highlight">효종 4년(1653)</span>에 지금 있는 자리로 옮겼습니다.
+        </div>
+      </div>
+      
+      <div class="section">
+        <div class="section-title">역사적 의의</div>
+        <div class="section-text">
+          추사 <span class="highlight">김정희</span>가 유배 생활을 할 때 이곳에서 학생들을 가르치기도 했다고 전해집니다.
+          <br><br>
+          앞쪽에 강학공간인 명륜당이 북향하여 자리잡고, 뒤쪽에 제향공간인 대성전이 남쪽을 향하여 자리잡고 있는 
+          <span class="highlight">전학후묘</span>의 배치를 이루고 있습니다.
+        </div>
+      </div>
+      
+      <div class="section">
+        <div class="section-title">현재의 모습</div>
+        <div class="section-text">
+          지금은 교육적 기능은 없어지고 제사 기능만 남아있으며, 1948년부터는 문명학원을 설립하여 운영하고 있습니다.
+          <br><br>
+          대정향교는 장식이 검소하고 단청을 하지 않아 전체적으로 <span class="highlight">간결한 느낌</span>을 주며, 
+          주위에 큰 소나무가 있어 운치를 더하고 있습니다.
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    const translations = {
+      ko: {
+        pageTitle: '다큐로 보기',
+        pageSubtitle: 'Documentary'
+      },
+      en: {
+        pageTitle: 'Watch Documentary',
+        pageSubtitle: 'Documentary Film'
+      },
+      ja: {
+        pageTitle: 'ドキュメンタリーで見る',
+        pageSubtitle: 'ドキュメンタリー'
+      },
+      zh: {
+        pageTitle: '观看纪录片',
+        pageSubtitle: '纪录片'
+      }
+    };
+  </script>
+</body>
+</html>
