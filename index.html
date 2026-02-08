@@ -12,7 +12,7 @@
     }
     
     body {
-      font-family: 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
       background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
       min-height: 100vh;
       display: flex;
@@ -24,21 +24,26 @@
     .container {
       max-width: 430px;
       width: 100%;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.98);
       border-radius: 24px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
       overflow: hidden;
       position: relative;
     }
     
+    /* 향교 배경 이미지 - 더 선명하고 크게 */
     .container::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgb(200,180,160)" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="200" height="200" fill="url(%23grid)"/><g opacity="0.15"><path d="M50,30 L150,30 L150,50 L130,50 L130,80 L150,80 L150,170 L50,170 L50,80 L70,80 L70,50 L50,50 Z M80,60 L80,100 L120,100 L120,60 Z" fill="rgb(139,90,43)"/><rect x="90" y="110" width="20" height="30" fill="rgb(139,90,43)"/></g></svg>') center/300px no-repeat;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      height: 60%;
+      background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Cdefs%3E%3ClinearGradient id="wood" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:rgb(139,90,43);stop-opacity:0.3" /%3E%3Cstop offset="100%25" style="stop-color:rgb(109,68,40);stop-opacity:0.3" /%3E%3C/linearGradient%3E%3C/defs%3E%3Cg opacity="0.25"%3E%3C!-- 지붕 --%3E%3Cpath d="M50,80 L200,40 L350,80 L330,85 L200,50 L70,85 Z" fill="url(%23wood)" stroke="rgb(80,50,30)" stroke-width="2"/%3E%3Cpath d="M70,85 L200,50 L330,85 L330,95 L200,60 L70,95 Z" fill="rgb(100,60,35)" opacity="0.4"/%3E%3C!-- 기둥들 --%3E%3Crect x="100" y="95" width="15" height="120" fill="rgb(120,70,40)" opacity="0.35"/%3E%3Crect x="190" y="95" width="20" height="120" fill="rgb(120,70,40)" opacity="0.35"/%3E%3Crect x="285" y="95" width="15" height="120" fill="rgb(120,70,40)" opacity="0.35"/%3E%3C!-- 기단 --%3E%3Crect x="80" y="215" width="240" height="15" fill="rgb(140,140,140)" opacity="0.3"/%3E%3Crect x="70" y="230" width="260" height="10" fill="rgb(120,120,120)" opacity="0.3"/%3E%3C!-- 문 --%3E%3Crect x="175" y="150" width="50" height="65" fill="rgb(100,60,35)" opacity="0.4" stroke="rgb(80,50,30)" stroke-width="2"/%3E%3Crect x="182" y="157" width="16" height="51" fill="rgb(80,50,30)" opacity="0.3"/%3E%3Crect x="202" y="157" width="16" height="51" fill="rgb(80,50,30)" opacity="0.3"/%3E%3C!-- 창문 --%3E%3Ccircle cx="140" cy="140" r="12" fill="rgb(200,180,150)" opacity="0.3" stroke="rgb(100,70,45)" stroke-width="2"/%3E%3Ccircle cx="260" cy="140" r="12" fill="rgb(200,180,150)" opacity="0.3" stroke="rgb(100,70,45)" stroke-width="2"/%3E%3C!-- 격자 무늬 --%3E%3Cline x1="135" y1="140" x2="145" y2="140" stroke="rgb(100,70,45)" stroke-width="1.5" opacity="0.4"/%3E%3Cline x1="140" y1="135" x2="140" y2="145" stroke="rgb(100,70,45)" stroke-width="1.5" opacity="0.4"/%3E%3Cline x1="255" y1="140" x2="265" y2="140" stroke="rgb(100,70,45)" stroke-width="1.5" opacity="0.4"/%3E%3Cline x1="260" y1="135" x2="260" y2="145" stroke="rgb(100,70,45)" stroke-width="1.5" opacity="0.4"/%3E%3C/g%3E%3C/svg%3E');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
       pointer-events: none;
       z-index: 0;
     }
@@ -85,6 +90,7 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
+      outline: none;
     }
     
     .lang-btn:hover {
@@ -154,10 +160,12 @@
       align-items: center;
       justify-content: center;
       font-size: 24px;
+      flex-shrink: 0;
     }
     
     .view-text {
       text-align: left;
+      flex: 1;
     }
     
     .view-title {
@@ -175,6 +183,7 @@
     .arrow {
       font-size: 20px;
       color: #8b5a3c;
+      flex-shrink: 0;
     }
     
     .footer {
@@ -185,6 +194,7 @@
       color: #666;
       position: relative;
       z-index: 1;
+      line-height: 1.6;
     }
     
     @media (max-width: 430px) {
@@ -313,7 +323,9 @@
     function changeLang(lang) {
       // 버튼 활성화 상태 변경
       const buttons = document.querySelectorAll('.lang-btn');
-      buttons.forEach(btn => btn.classList.remove('active'));
+      buttons.forEach(function(btn) {
+        btn.classList.remove('active');
+      });
       event.target.classList.add('active');
       
       // 텍스트 변경
@@ -331,8 +343,6 @@
       
       // HTML lang 속성 변경
       document.documentElement.lang = lang;
-      
-      console.log('Language changed to:', lang);
     }
   </script>
 </body>
