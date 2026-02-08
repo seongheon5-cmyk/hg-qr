@@ -202,8 +202,8 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>대정향교</h1>
-      <p>Daejeong Hyanggyo · 大靜鄕校</p>
+      <h1 id="mainTitle">대정향교</h1>
+      <p id="subTitle">Daejeong Hyanggyo · 大靜鄕校</p>
     </div>
     
     <div class="lang-selector">
@@ -214,15 +214,15 @@
     </div>
     
     <div class="content">
-      <div class="section-title">관람 방식 선택</div>
+      <div class="section-title" id="sectionTitle">관람 방식 선택</div>
       
       <div class="view-modes">
         <a href="./p/animation.html" class="view-btn">
           <div class="view-btn-content">
             <div class="view-icon">🎬</div>
             <div class="view-text">
-              <div class="view-title">애니메이션으로 보기</div>
-              <div class="view-desc">생동감 있는 영상으로 감상하기</div>
+              <div class="view-title" id="animationTitle">애니메이션으로 보기</div>
+              <div class="view-desc" id="animationDesc">생동감 있는 영상으로 감상하기</div>
             </div>
           </div>
           <div class="arrow">→</div>
@@ -232,8 +232,8 @@
           <div class="view-btn-content">
             <div class="view-icon">📹</div>
             <div class="view-text">
-              <div class="view-title">다큐로 보기</div>
-              <div class="view-desc">역사와 문화를 깊이 있게 탐구</div>
+              <div class="view-title" id="documentaryTitle">다큐로 보기</div>
+              <div class="view-desc" id="documentaryDesc">역사와 문화를 깊이 있게 탐구</div>
             </div>
           </div>
           <div class="arrow">→</div>
@@ -243,8 +243,8 @@
           <div class="view-btn-content">
             <div class="view-icon">📖</div>
             <div class="view-text">
-              <div class="view-title">글로 보기</div>
-              <div class="view-desc">상세한 설명과 함께 읽기</div>
+              <div class="view-title" id="articleTitle">글로 보기</div>
+              <div class="view-desc" id="articleDesc">상세한 설명과 함께 읽기</div>
             </div>
           </div>
           <div class="arrow">→</div>
@@ -252,19 +252,86 @@
       </div>
     </div>
     
-    <div class="footer">
+    <div class="footer" id="footer">
       제주특별자치도 서귀포시 대정읍<br>
       © 2024 Daejeong Hyanggyo Guide
     </div>
   </div>
   
   <script>
+    const translations = {
+      ko: {
+        mainTitle: '대정향교',
+        subTitle: 'Daejeong Hyanggyo · 大靜鄕校',
+        sectionTitle: '관람 방식 선택',
+        animationTitle: '애니메이션으로 보기',
+        animationDesc: '생동감 있는 영상으로 감상하기',
+        documentaryTitle: '다큐로 보기',
+        documentaryDesc: '역사와 문화를 깊이 있게 탐구',
+        articleTitle: '글로 보기',
+        articleDesc: '상세한 설명과 함께 읽기',
+        footer: '제주특별자치도 서귀포시 대정읍<br>© 2024 Daejeong Hyanggyo Guide'
+      },
+      en: {
+        mainTitle: 'Daejeong Hyanggyo',
+        subTitle: 'Confucian School',
+        sectionTitle: 'Select Viewing Method',
+        animationTitle: 'Watch Animation',
+        animationDesc: 'Experience with vivid videos',
+        documentaryTitle: 'Watch Documentary',
+        documentaryDesc: 'Explore history and culture in depth',
+        articleTitle: 'Read Article',
+        articleDesc: 'Read with detailed explanations',
+        footer: 'Daejeong-eup, Seogwipo-si, Jeju<br>© 2024 Daejeong Hyanggyo Guide'
+      },
+      ja: {
+        mainTitle: '大静郷校',
+        subTitle: '儒教教育機関',
+        sectionTitle: '閲覧方法を選択',
+        animationTitle: 'アニメーションで見る',
+        animationDesc: '生き生きとした映像で鑑賞',
+        documentaryTitle: 'ドキュメンタリーで見る',
+        documentaryDesc: '歴史と文化を深く探求',
+        articleTitle: '文章で見る',
+        articleDesc: '詳細な説明と共に読む',
+        footer: '済州特別自治道 西帰浦市 大静邑<br>© 2024 Daejeong Hyanggyo Guide'
+      },
+      zh: {
+        mainTitle: '大静乡校',
+        subTitle: '儒学教育机构',
+        sectionTitle: '选择观看方式',
+        animationTitle: '观看动画',
+        animationDesc: '通过生动的视频欣赏',
+        documentaryTitle: '观看纪录片',
+        documentaryDesc: '深入探索历史和文化',
+        articleTitle: '阅读文章',
+        articleDesc: '阅读详细说明',
+        footer: '济州特别自治道 西归浦市 大静邑<br>© 2024 Daejeong Hyanggyo Guide'
+      }
+    };
+    
     function changeLang(lang) {
+      // 버튼 활성화 상태 변경
       const buttons = document.querySelectorAll('.lang-btn');
       buttons.forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
       
-      // 추후 언어별 콘텐츠 전환 로직 추가 가능
+      // 텍스트 변경
+      const t = translations[lang];
+      document.getElementById('mainTitle').textContent = t.mainTitle;
+      document.getElementById('subTitle').textContent = t.subTitle;
+      document.getElementById('sectionTitle').textContent = t.sectionTitle;
+      document.getElementById('animationTitle').textContent = t.animationTitle;
+      document.getElementById('animationDesc').textContent = t.animationDesc;
+      document.getElementById('documentaryTitle').textContent = t.documentaryTitle;
+      document.getElementById('documentaryDesc').textContent = t.documentaryDesc;
+      document.getElementById('articleTitle').textContent = t.articleTitle;
+      document.getElementById('articleDesc').textContent = t.articleDesc;
+      document.getElementById('footer').innerHTML = t.footer;
+      
+      // HTML lang 속성 변경
+      document.documentElement.lang = lang;
+      
       console.log('Language changed to:', lang);
     }
   </script>
